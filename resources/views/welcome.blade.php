@@ -29,17 +29,19 @@
         <nav class="bg-gray-900 py-2 relative">
             <div class="container mx-auto flex px-8 xl:px-0">
 
-              <div class="flex flex-grow items-center">
+                <div class="flex flex-grow items-center">
                     <img src="img/Perfuventas.png" width="60px">
                 </div>
                 
                 <div class="flex lg:hidden">
-                <svg class="h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" onclick="openMenu();">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
+                  <svg class="h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" onclick="openMenu();">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
                 </div>
+
                 <div id="menu" class="lg:flex hidden flex-grow justify-between absolute lg:relative lg:top-0 top-20 left-0
                     bg-gray-900 w-full lg:w-auto items-center py-14 lg:py-0 px-8 sm:px-24 lg:px-0">
+                   
                     <div class="flex flex-col lg:flex-row mb-8 lg:mb-0">
                         <a href="" class="text-white hover:text-opacity-75 lg:mr-7 mb-8 lg:mb-0">Inicio</a>
                         <a class="text-white hover:text-opacity-75 lg:mr-7 mb-8 lg:mb-0">Quien somos</a>
@@ -47,11 +49,42 @@
                         <a class="text-white hover:text-opacity-75 lg:mr-7 mb-8 lg:mb-0">Perfumeria de hombre</a>
                         <a class="text-white hover:text-opacity-75 lg:mr-7 mb-8 lg:mb-0">Contacto</a>
                     </div>
-                    <div class="flex flex-col lg:flex-row text-center">
-                        <a href="{{ route('login') }}" class="text-white border border-white py-2.5 px-5 rounded-md hover:bg-white hover:text-gray-800 transition duration-500 ease-in-out lg:mr-4 mb-8 lg:mb-0">Iniciar Sesion</a>
-                        <a href="{{ route('register') }}" class="text-white bg-blue-500 border border-blue-500 py-2.5 px-5 rounded-md hover:bg-blue-700 hover:border-blue-600 transition duration-500 ease-in-out">Registrate</a>
-                    </div>
+
+                    @guest
+                      <div class="flex flex-col lg:flex-row">
+    
+                        
+                          <a href="{{ route('login') }}" class="text-white border border-white py-2.5 px-5 rounded-md hover:bg-white hover:text-gray-800 transition duration-500 ease-in-out lg:mr-4 mb-8 lg:mb-0">Iniciar Sesion</a>
+                        
+                        @if (Route::has('register'))
+                          <a href="" class="text-white bg-blue-500 border border-blue-500 py-2.5 px-5 rounded-md hover:bg-blue-700 hover:border-blue-600 transition duration-500 ease-in-out">Registrate</a>
+                        @endif  
+                      
+                        @else
+                            <div class="flex flex-col lg:flex-row -mt-4 lg:mt-0">
+
+
+                                   <a class="text-white text-lg font-semibold">{{ Auth::user()->name }}</a>
+
+                                    
+                                    <a class="text-white text-lg hover:text-opacity-50 mt-3 lg:mt-0 lg:pl-4" href="{{ route('logout') }}"
+                                      onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                
+                            
+                            </div>
+                            
+                      </div>
+                    @endguest
+
+                    
                 </div>
+
             </div>
         </nav>
 
