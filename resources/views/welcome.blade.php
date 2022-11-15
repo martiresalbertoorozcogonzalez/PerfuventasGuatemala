@@ -61,10 +61,10 @@
                         @endif  
                       
                         @else
-                            <div class="flex flex-col lg:flex-row -mt-4 lg:mt-0">
+                          <div class="flex flex-col lg:flex-row -mt-4 lg:mt-0">
 
 
-                                   <a class="text-white text-lg font-semibold">{{ Auth::user()->name }}</a>
+                                   <a href="{{ route('dashboard') }}" class="text-white text-lg font-semibold">{{ Auth::user()->name }}</a>
 
                                     
                                     <a class="text-white text-lg hover:text-opacity-50 mt-3 lg:mt-0 lg:pl-4" href="{{ route('logout') }}"
@@ -77,7 +77,7 @@
                                     </form>
                                 
                             
-                            </div>
+                          </div>
                             
                       </div>
                     @endguest
